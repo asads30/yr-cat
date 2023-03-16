@@ -101,9 +101,10 @@ export default new Vuex.Store({
                 color: '#27ae60',
                 text_color: '#fff'
             });
+            window.Telegram.WebApp.BackButton.hide();
         },
         backButtonShow(){
             window.Telegram.WebApp.BackButton.show();
         }
-    },
+    }
 })
