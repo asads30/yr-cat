@@ -94,14 +94,16 @@ export default new Vuex.Store({
     actions: {
         async fetchProducts({commit}) {
             const response = await api.fetchProducts();
-            commit('setProducts', response.data)
-            window.Telegram.WebApp.isClosingConfirmationEnabled = true
-            window.Telegram.WebApp.expand()
+            commit('setProducts', response.data);
+            window.Telegram.WebApp.isClosingConfirmationEnabled = true;
+            window.Telegram.WebApp.expand();
             window.Telegram.WebApp.MainButton.setParams({
                 color: '#27ae60',
                 text_color: '#fff'
-            })
+            });
         },
-        
+        backButtonShow(){
+            window.Telegram.WebApp.BackButton.show();
+        }
     },
 })

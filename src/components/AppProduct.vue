@@ -22,6 +22,7 @@
 </template>
 
 <script>
+    import {mapState, mapActions} from "vuex";
     export default {
         name: 'AppProduct',
         data() {
@@ -42,24 +43,32 @@
         },
         methods: {
             addToCart() {
-                this.$store.commit('addToCart', this.product);
+                this.$store.commit('addToCart', this.product)
                 this.quantity++
             },
             reduceQuantity() {
-                this.$store.commit('reduceQuantity', this.product.id);
+                this.$store.commit('reduceQuantity', this.product.id)
                 this.quantity--
             },
             increaseQuantity() {
-                this.$store.commit('increaseQuantity', this.product.id);
+                this.$store.commit('increaseQuantity', this.product.id)
                 this.quantity++
             },
             fetchData(){
                 let current = this.$store.state.cart.find(product => product.id === this.product.id)?.quantity || null
                 this.quantity = current
-            }
+            },
+            ...mapActions([
+                'backButtonShow'
+            ]),
+            goHome(){
+                this.$router.push('/');
+            },
         },
         mounted() {
-            this.fetchData()
+            this.fetchData();
+            this.backButtonShow();
+            window.Telegram.WebApp.onEvent('backButtonClicked', this.goHome);
         },
         watch: {
             $route: 'fetchData',
