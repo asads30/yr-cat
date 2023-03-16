@@ -1,10 +1,7 @@
 <template>
   <div class="item" v-if="getProduct">
-    <router-link class="item-img" :to="'/product/' + product.id">
-      <img
-        :src=" require('../assets/icons/' + product.image) "
-        class="item__img"
-      >
+    <router-link class="item-top" :to="'/product/' + product.id">
+      <div :style="'background-image: url(' + require('../assets/icons/' + product.image) + ' );'" class="item-img"></div>
     </router-link>
     <div class="item-info">
       <router-link class="item-name" :to="'/product/' + product.id">{{ product.name }}</router-link>
@@ -16,9 +13,9 @@
         @click="addToCart"
       >{{ product.price.toLocaleString() }} ₽</button>
       <div v-if="!btnActive" class="quantity">
-        <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity">-</button>
+        <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
         <div class="quantity-val">{{ quantity }}</div>
-        <button class="quantity-item quantity-item--plus" type="button" @click="increaseQuantity">+</button>
+        <button class="quantity-item quantity-item--plus" type="button" @click="increaseQuantity"></button>
       </div>
     </div>
   </div>
@@ -68,7 +65,7 @@ export default {
       this.quantity = current
     }
   },
-  created() {
+  mounted() {
     this.fetchData()
   },
   watch: {

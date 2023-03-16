@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = 'https://yr-cat.netlify.app';
+const SERVER_URL = 'http://localhost:8080';
 
 const api = {
     async fetchProducts() {

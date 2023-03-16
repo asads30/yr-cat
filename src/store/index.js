@@ -57,6 +57,16 @@ export default new Vuex.Store({
                 if (product.id === productId) {
                     if (product.quantity > 0) {
                         product.quantity--;
+                        let result = [];
+                        for (let item of state.cart) {
+                            result.push(item.price.toFixed(2) * item.quantity.toFixed(2));
+                        }
+                        result = result.reduce(function (sum, el) {
+                            return sum + el;
+                        })
+                        window.Telegram.WebApp.MainButton.setParams({
+                            text: 'Оплатить ' + result.toFixed(2).toLocaleString() + ' ₽'
+                        })
                     }
                     if (product.quantity === 0) {
                         product.isBtnActive = true;
@@ -64,18 +74,19 @@ export default new Vuex.Store({
                         if(state.cart.length === 0){
                             window.Telegram.WebApp.MainButton.hide();
                             window.Telegram.WebApp.MainButton.disable();
+                        } else{
+                            let result = [];
+                            for (let item of state.cart) {
+                                result.push(item.price.toFixed(2) * item.quantity.toFixed(2));
+                            }
+                            result = result.reduce(function (sum, el) {
+                                return sum + el;
+                            })
+                            window.Telegram.WebApp.MainButton.setParams({
+                                text: 'Оплатить ' + result.toFixed(2).toLocaleString() + ' ₽'
+                            })
                         }
                     }
-                    let result = [];
-                    for (let item of state.cart) {
-                        result.push(item.price.toFixed(2) * item.quantity.toFixed(2));
-                    }
-                    result = result.reduce(function (sum, el) {
-                        return sum + el;
-                    })
-                    window.Telegram.WebApp.MainButton.setParams({
-                        text: 'Оплатить ' + result.toFixed(2).toLocaleString() + ' ₽'
-                    })
                 }
             })
         }

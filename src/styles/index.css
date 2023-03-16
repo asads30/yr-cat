@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
-
 :root{
     --tg-theme-secondary-bg-color: #EFEFEF;
     --tg-theme-bg-color: #fff;
@@ -12,20 +10,19 @@ body {
     height: 100vh;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    font-style: normal;
     background: #efefef;
     position: relative;
 }
 
 #app{
-    padding: 12px 0;
+    padding: 0;
     height: 100%;
 }
 
 .header{
     max-width: 100vw;
     overflow-x: scroll;
-    padding: 0 12px;
+    padding: 12px;
 }
 
 .header-nav{
@@ -51,13 +48,13 @@ body {
 
 .catalog-content{
     position: relative; 
-    height: calc(100vh - 63px); 
+    height: calc(100vh - 51px); 
     overflow-y: scroll;
-    padding: 0 12px;
+    padding: 0 12px 12px;
 }
 
-.catalog-box{
-    margin-bottom: 20px;
+.catalog-box:not(:last-child){
+    margin-bottom: 12px;
 }
 
 .catalog-title{
@@ -79,31 +76,22 @@ body {
 .catalog-list{
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
 }
 
 .item{
-    width: calc(50% - 8px);
+    width: calc(50% - 6px);
     background: #fff;
     border-radius: 12px;
 }
 
 .item-img{
     height: 115px;
-    max-width: 100%;
-    background: #fff;
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.item__img{
+    background-size: cover;
+    background-position: center;
     width: 100%;
-    max-height: 115px;
-    border-top-right-radius: 12px;
-    border-top-left-radius: 12px;
 }
 
 .item-info{
@@ -112,16 +100,14 @@ body {
 
 .item-name{
     color: #000;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 600;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    margin-bottom: 8px;
-    line-height: 18px;
-    height: 18px;
+    margin-bottom: 6px;
+    line-height: 15px;
+    height: 15px;
     text-decoration: none;
 }
 
@@ -129,14 +115,12 @@ body {
     font-weight: 400;
     font-size: 11px;
     color: #8E8E92;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     margin-bottom: 8px;
-    line-height: 14px;
-    height: 14px;
+    line-height: 12px;
+    height: 12px;
     text-decoration: none;
 }
 
@@ -150,6 +134,7 @@ body {
     font-weight: 600;
     font-size: 14px;
     line-height: 30px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .quantity{
@@ -162,13 +147,33 @@ body {
 .quantity-item{
     height: 30px;
     width: 30px;
-    border-radius: 30px;
+    line-height: 30px;
+    border-radius: 5px;
     background: #3478F6;
-    color: #fff;
     border: 0;
     font-weight: 600;
     font-size: 14px;
-    line-height: 30px;
+    position: relative;
+}
+
+.quantity-item::before{
+    content: '';
+    width: 12px;
+    height: 2px;
+    position: absolute;
+    left: 9px;
+    top: 14px;
+    background: #fff;
+}
+
+.quantity-item--plus::after{
+    content: '';
+    height: 12px;
+    width: 2px;
+    position: absolute;
+    top: 9px;
+    left: 14px;
+    background: #fff;
 }
 
 .quantity-val{
@@ -179,16 +184,23 @@ body {
 }
 
 .product{
+    padding: 12px;
+    height: 100%;
+}
+
+.product-box{
     background: #fff;
     border-radius: 12px;
     height: 100%;
-    padding: 0 12px;
 }
 
 .product-img{
+    height: 246px;
     border-top-right-radius: 12px;
     border-top-left-radius: 12px;
-    height: 246px;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
 }
 
 .product-img>img{
@@ -250,11 +262,31 @@ body {
     width: 44px;
     border-radius: 12px;
     background: #3478F6;
-    color: #fff;
     border: 0;
     font-weight: 600;
     font-size: 20px;
     line-height: 44px;
+    position: relative;
+}
+
+.product-quantity-item::before{
+    content: '';
+    width: 16px;
+    height: 2px;
+    position: absolute;
+    left: 14px;
+    top: 21px;
+    background: #fff;
+}
+
+.product-quantity--plus::after{
+    content: '';
+    height: 16px;
+    width: 2px;
+    position: absolute;
+    top: 14px;
+    left: 21px;
+    background: #fff;
 }
 
 .product-quantity-val{
