@@ -18,14 +18,14 @@ body {
 }
 
 #app{
-    padding: 12px;
+    padding: 12px 0;
     height: 100%;
 }
 
 .header{
     max-width: 100vw;
     overflow-x: scroll;
-    margin-bottom: 12px;
+    padding: 0 12px;
 }
 
 .header-nav{
@@ -53,6 +53,7 @@ body {
     position: relative; 
     height: calc(100vh - 63px); 
     overflow-y: scroll;
+    padding: 0 12px;
 }
 
 .catalog-box{
@@ -181,6 +182,7 @@ body {
     background: #fff;
     border-radius: 12px;
     height: 100%;
+    padding: 0 12px;
 }
 
 .product-img{

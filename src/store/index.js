@@ -27,7 +27,7 @@ export default new Vuex.Store({
             window.Telegram.WebApp.MainButton.show()
             window.Telegram.WebApp.MainButton.enable()
             window.Telegram.WebApp.MainButton.setParams({
-                text: 'Оплатить ' + result.toFixed(2) + ' ₽'
+                text: 'Оплатить ' + result.toFixed(2).toLocaleString() + ' ₽'
             })
         },
         increaseQuantity: (state, productId) => {
@@ -47,7 +47,7 @@ export default new Vuex.Store({
                         return sum + el;
                     })
                     window.Telegram.WebApp.MainButton.setParams({
-                        text: 'Оплатить ' + result.toFixed(2) + ' ₽'
+                        text: 'Оплатить ' + result.toFixed(2).toLocaleString() + ' ₽'
                     })
                 }
             })
@@ -74,7 +74,7 @@ export default new Vuex.Store({
                         return sum + el;
                     })
                     window.Telegram.WebApp.MainButton.setParams({
-                        text: 'Оплатить ' + result.toFixed(2) + ' ₽'
+                        text: 'Оплатить ' + result.toFixed(2).toLocaleString() + ' ₽'
                     })
                 }
             })

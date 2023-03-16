@@ -14,7 +14,7 @@
         class="item-add"
         type="button"
         @click="addToCart"
-      >{{ product.price }} ₽</button>
+      >{{ product.price.toLocaleString() }} ₽</button>
       <div v-if="!btnActive" class="quantity">
         <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity">-</button>
         <div class="quantity-val">{{ quantity }}</div>
