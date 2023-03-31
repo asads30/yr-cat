@@ -39,3 +39,11 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .catalog-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+</style>

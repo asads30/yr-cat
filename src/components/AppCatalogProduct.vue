@@ -1,14 +1,14 @@
 <template>
     <div class="item" v-if="product">
-        <router-link class="item-top" :to="'/product/' + product.id">
+        <div class="item-top">
             <div 
                 :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'"
                 class="item-img"
             ></div>
-        </router-link>
+        </div>
         <div class="item-info">
-            <router-link class="item-name" :to="'/product/' + product.id">{{ product.name }}</router-link>
-            <router-link class="item-des" :to="'/product/' + product.id">{{ product.description }}</router-link>
+            <div class="item-name">{{ product.name }}</div>
+            <div>{{ product.description }}</div>
             <button
                 v-if="btnActive"
                 class="item-add"
