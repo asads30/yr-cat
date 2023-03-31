@@ -13,18 +13,18 @@
           </b-nav>
         </div>
         <div 
-          v-for="category in categories"
-          :key="category.id"
           id="nav-scroller"
           ref="content"
           class="catalog-content"
         >
             <div
+              v-for="category in categories"
+              :key="category.id"
               class="catalog-box"
               :id="'cat' + category.id"
             >
                 <div class="catalog-title">{{ category.name }}</div>
-                <div class="catalog-des">{{ category.des }}</div>
+                <div class="catalog-des">{{ category.description }}</div>
                 <div class="catalog-list">
                 </div>
             </div>
