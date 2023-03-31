@@ -1,75 +1,52 @@
 <template>
-  <div class="item" v-if="getProduct">
-    <router-link class="item-top" :to="'/product/' + product.id">
-      <div :style="'background-image: url(' + require('../assets/icons/' + product.image) + ' );'" class="item-img"></div>
-    </router-link>
-    <div class="item-info">
-      <router-link class="item-name" :to="'/product/' + product.id">{{ product.name }}</router-link>
-      <router-link class="item-des" :to="'/product/' + product.id">{{ product.short }}</router-link>
-      <button
-        v-if="btnActive"
-        class="item-add"
-        type="button"
-        @click="addToCart"
-      >{{ product.price.toLocaleString() }} ₽</button>
-      <div v-if="!btnActive" class="quantity">
-        <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
-        <div class="quantity-val">{{ quantity }}</div>
-        <button class="quantity-item quantity-item--plus" type="button" @click="increaseQuantity"></button>
-      </div>
-    </div>
+  <div class="category-list" v-show="products">
+    <AppCatalogProduct 
+      v-for="product in products"
+      :key="product.id"
+      :product="product"
+    />
   </div>
 </template>
 
 <script>
+import { api } from '@/services/api'
+import AppCatalogProduct from '@/components/AppCatalogProduct'
 export default {
   name: "AppCatalogItem",
   props: {
-    product: {
-      type: Object,
-      required: true
-    },
-    categoryId: {
+    id: {
       type: Number,
       required: true
     }
   },
+  components: {
+    AppCatalogProduct
+  },
   data() {
     return {
-      quantity: 0
-    }
-  },
-  computed: {
-    btnActive() {
-      return this.$store.state.cart.find(product => product.id === this.product.id) ? this.product.isBtnActive : true;
-    },
-    getProduct(){
-      return (this.product.category_id == this.categoryId) ? this.product : null;
-    }
-  },
-  methods: {
-    addToCart() {
-      this.$store.commit('addToCart', this.product);
-      this.quantity++
-    },
-    reduceQuantity() {
-      this.$store.commit('reduceQuantity', this.product.id);
-      this.quantity--
-    },
-    increaseQuantity() {
-      this.$store.commit('increaseQuantity', this.product.id);
-      this.quantity++
-    },
-    fetchData(){
-      let current = this.$store.state.cart.find(product => product.id === this.product.id)?.quantity || null
-      this.quantity = current
+      products: []
     }
   },
   mounted() {
-    this.fetchData()
+    const id_store = localStorage.getItem('id_store')
+    try {
+      api.get(`/product/${id_store}/categories/${this.id}`).then((response) => {
+        this.products = response.data.products
+      })
+    } catch (error) {
+      console.log(error)
+    }
   },
-  watch: {
-    $route: 'fetchData'
+  methods: {
+    background (buffer) {
+      var binary = '';
+      var bytes = new Uint8Array( buffer );
+      var len = bytes.byteLength;
+      for (var i = 0; i < len; i++) {
+          binary += String.fromCharCode( bytes[ i ] );
+      }
+      return 'data:image/png;base64,' + window.btoa( binary )
+    }
   }
 }
 </script>

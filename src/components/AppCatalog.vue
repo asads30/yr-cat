@@ -25,8 +25,7 @@
             >
                 <div class="catalog-title">{{ category.name }}</div>
                 <div class="catalog-des">{{ category.description }}</div>
-                <div class="catalog-list">
-                </div>
+                <AppCatalogItem :id="category?.id" />
             </div>
         </div>
     </div>

@@ -105,6 +105,12 @@ export default new Vuex.Store({
             } catch (err) {
                 console.error(err)
             }
+            try {
+                const res = await api.get(`product/${id_store}`)
+                commit('setProducts', res.data.products);
+            } catch (err) {
+                console.error(err)
+            }
         }
     }
 })
