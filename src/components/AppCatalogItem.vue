@@ -1,5 +1,5 @@
 <template>
-  <div class="category-list" v-show="products">
+  <div class="category-list" v-show="products" style="display: flex;flex-wrap: wrap;gap: 12px;">
     <AppCatalogProduct 
       v-for="product in products"
       :key="product.id"
@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
   .catalog-list{
     display: flex;
     flex-wrap: wrap;
