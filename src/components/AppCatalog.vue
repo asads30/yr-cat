@@ -49,7 +49,8 @@
     components: {AppCatalogItem},
     computed: {
       ...mapState([
-        "products"
+        "products",
+        "categories"
       ]),
     },
     methods: {
@@ -67,10 +68,25 @@
         if (el) {
           this.$refs.content.scrollTop = el.offsetTop
         }
+      },
+      loadData(){
+        const id = this.$route.params.id
+        localStorage.setItem('id_store', id)
+        const tg = window.Telegram.WebApp;
+        tg.isClosingConfirmationEnabled = true;
+        tg.expand();
+        tg.BackButton.hide();
+        tg.MainButton.setParams({
+            color: '#27ae60',
+            text_color: '#fff'
+        });
+        localStorage.setItem('init_data', tg.initData)
+        localStorage.setItem('user_id', tg.initDataUnsafe.user.id)
       }
     },
     mounted() {
       this.fetchProducts()
+      this.loadData()
     }
   }
   </script>

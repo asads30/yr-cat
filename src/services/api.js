@@ -1,16 +1,11 @@
-import axios from "axios";
+import axios from 'axios'
 
-const SERVER_URL = 'https://yr-cat.netlify.app';
+const api = axios.create({
+  baseURL: '/api',
+  timeout: 5000,
+  headers: {
+    Authorization: localStorage.getItem('init_data')
+  }
+})
 
-const api = {
-    async fetchProducts() {
-        try {
-            return axios(`${SERVER_URL}/products.json`);
-        }
-        catch (error) {
-            console.error(error);
-        }
-    },
-}
-
-export default api;
+export { api }
