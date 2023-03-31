@@ -6,17 +6,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        products: [],
         categories: [],
+        products: [],
         cart: [],
         data: null
     },
     mutations: {
-        setProducts: (state, products) => {
-            state.products = products;
-        },
         setCategories: (state, categories) => {
             state.categories = categories;
+        },
+        setProducts: (state, products) => {
+            state.products = products;
         },
         addToCart: (state, product) => {
             product.isBtnActive = false;
@@ -97,31 +97,14 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async fetchProducts({commit}, state) {
+        async fetchCategories({commit}) {
             const id_store = localStorage.getItem('id_store')
             try {
-                const res = await api.get(`shop/${id_store}`)
-                state.data = res.data
-            } catch (err) {
-                console.error(err)
-            }
-            try {
                 const res = await api.get(`category/${id_store}`)
-                state.categories = res.data.categories
                 commit('setCategories', res.data.categories);
             } catch (err) {
                 console.error(err)
             }
-            try {
-                const res = await api.get(`product/${id_store}`)
-                state.products = res.data.products
-                commit('setProducts', res.data.products);
-            } catch (err) {
-                console.error(err)
-            }
-        },
-        backButtonShow(){
-            window.Telegram.WebApp.BackButton.show();
         }
     }
 })

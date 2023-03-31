@@ -7,7 +7,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/:id',
+    path: '/shop/:id',
     component: AppCatalog,
     name: 'catalog',
   },
