@@ -75,8 +75,6 @@
         });
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
-        tg.onEvent('mainButtonClicked', this.goPay())
-
       },
       goPay(){
         let id_store = localStorage.getItem('id_store');
@@ -86,6 +84,7 @@
         })).catch((error) => {
           console.log(error)
         })
+        console.log(data);
       }
     },
     mounted() {
