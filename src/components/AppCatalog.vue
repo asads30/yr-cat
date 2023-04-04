@@ -79,20 +79,19 @@
       goPay(){
         let id_store = localStorage.getItem('id_store');
         let data = this.$store.getters.sendCart
-        if(data){
+        if(data.arrayOfPostIds.length > 0){
           api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
             console.log(response)
           })).catch((error) => {
             console.log(error)
           })
         }
-        console.log(data)
       }
     },
     mounted() {
       this.loadData();
       this.fetchCategories();
-      window.Telegram.WebApp.onEvent('mainButtonClicked', this.goPay())
+      window.Telegram.WebApp.onEvent('mainButtonClicked', this.goPay)
     }
   }
   </script>
