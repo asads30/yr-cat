@@ -79,13 +79,14 @@
       goPay(){
         let id_store = localStorage.getItem('id_store');
         let data = this.$store.getters.sendCart
-        if(this.$store.state.cart.length > 0){
+        if(data){
           api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
             console.log(response)
           })).catch((error) => {
             console.log(error)
           })
         }
+        console.log(data)
       }
     },
     mounted() {
