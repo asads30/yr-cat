@@ -93,6 +93,8 @@
             console.log(error)
           })
         }
+        console.log('click1');
+        console.log(this.$store);
       }
     },
     mounted() {
