@@ -75,7 +75,6 @@ import { json } from "body-parser";
         });
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
-        window.Telegram.WebApp.onEvent('mainButtonClicked', this.goPay);
       },
       goPay(){
         let result = [];
@@ -99,6 +98,7 @@ import { json } from "body-parser";
     mounted() {
       this.loadData();
       this.fetchCategories();
+      window.Telegram.WebApp.onEvent('mainButtonClicked', this.goPay())
     }
   }
   </script>
