@@ -78,23 +78,21 @@
 
       },
       goPay(){
-        let result = [];
-        let id_store = localStorage.getItem('id_store');
-        if (this.cart.length) {
+        if (this.$store.cart.length) {
+          let result = [];
+          let id_store = localStorage.getItem('id_store');
           for (let product of this.cart) {
             result.push(product.postId);
           }
-          return result;
+          let data = {
+            "arrayOfPostIds": result
+          }
+          api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
+            console.log(response)
+          })).catch((error) => {
+            console.log(error)
+          })
         }
-        let data = {
-          "arrayOfPostIds": result
-        }
-        api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
-          console.log(response)
-        })).catch((error) => {
-          console.log(error)
-        })
-        console.log('click')
       }
     },
     mounted() {
