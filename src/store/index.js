@@ -11,6 +11,18 @@ export default new Vuex.Store({
         cart: [],
         data: null
     },
+    getters: {
+        sendCart (state) {
+            let result = [];
+            for (let product of state.cart) {
+                result.push(product.postId);
+            }
+            let data = {
+                "arrayOfPostIds": result
+            }
+            return data;
+        }
+    },
     mutations: {
         setCategories: (state, categories) => {
             state.categories = categories;

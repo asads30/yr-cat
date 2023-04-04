@@ -42,7 +42,8 @@
     components: {AppCatalogItem},
     computed: {
       ...mapState([
-        "categories"
+        "categories",
+        "cart"
       ]),
     },
     methods: {
@@ -78,23 +79,13 @@
 
       },
       goPay(){
-        if (this.$store.state.cart.length) {
-          let result = [];
-          let id_store = localStorage.getItem('id_store');
-          for (let product of this.cart) {
-            result.push(product.postId);
-          }
-          let data = {
-            "arrayOfPostIds": result
-          }
-          api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
-            console.log(response)
-          })).catch((error) => {
-            console.log(error)
-          })
-        }
-        console.log('click1');
-        console.log(this.$store);
+        let id_store = localStorage.getItem('id_store');
+        let data = this.$store.getters.sendCart
+        api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
+          console.log(response)
+        })).catch((error) => {
+          console.log(error)
+        })
       }
     },
     mounted() {
