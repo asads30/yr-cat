@@ -78,7 +78,7 @@
 
       },
       goPay(){
-        if (this.$store.cart.length) {
+        if (this.$store.state.cart.length) {
           let result = [];
           let id_store = localStorage.getItem('id_store');
           for (let product of this.cart) {
