@@ -15,8 +15,8 @@ export default new Vuex.Store({
         setCategories: (state, categories) => {
             state.categories = categories;
         },
-        setProducts: (state, products) => {
-            state.products = products;
+        addProducts: (state, payload) => {
+            state.products.push(payload.products)
         },
         addToCart: (state, product) => {
             product.isBtnActive = false;

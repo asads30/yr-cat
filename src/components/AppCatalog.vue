@@ -35,6 +35,7 @@
   import AppCatalogItem from "@/components/AppCatalogItem";
   import 'bootstrap/dist/css/bootstrap.min.css'
   import {mapState, mapMutations, mapActions} from 'vuex';
+  import {api} from '@/services/api'
   
   export default {
     name: "AppCatalog",
@@ -73,11 +74,30 @@
         });
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
+      },
+      goPay(){
+        let result = [];
+        let id_store = localStorage.getItem('id_store');
+        if (this.cart.length) {
+          for (let product of this.cart) {
+            result.push(product.postId);
+          }
+          return result;
+        }
+        let data = {
+          "arrayOfPostIds": result
+        }
+        api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
+          console.log(response)
+        })).catch((error) => {
+          console.log(error)
+        })
       }
     },
     mounted() {
       this.loadData();
       this.fetchCategories();
+      window.Telegram.WebApp.onEvent('mainButtonClicked', this.goPay);
     }
   }
   </script>

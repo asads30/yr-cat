@@ -11,6 +11,7 @@
 <script>
 import { api } from '@/services/api'
 import AppCatalogProduct from '@/components/AppCatalogProduct'
+
 export default {
   name: "AppCatalogItem",
   props: {
@@ -32,6 +33,9 @@ export default {
     try {
       api.get(`/product/${id_store}/categories/${this.id}`).then((response) => {
         this.products = response.data.products
+        this.$store.commit('addProducts', {
+          products: response.data.products
+        })
       })
     } catch (error) {
       console.log(error)
