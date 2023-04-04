@@ -36,7 +36,6 @@
   import 'bootstrap/dist/css/bootstrap.min.css'
   import {mapState, mapMutations, mapActions} from 'vuex';
   import {api} from '@/services/api'
-import { json } from "body-parser";
   
   export default {
     name: "AppCatalog",
@@ -75,6 +74,8 @@ import { json } from "body-parser";
         });
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
+        tg.onEvent('mainButtonClicked', this.goPay())
+
       },
       goPay(){
         let result = [];
@@ -83,11 +84,12 @@ import { json } from "body-parser";
           for (let product of this.cart) {
             result.push(product.postId);
           }
+          return result;
         }
         let data = {
           "arrayOfPostIds": result
         }
-        api.post(`/product/${id_store}/createInvoiceLink`, JSON.parse(data)).then((response => {
+        api.post(`/product/${id_store}/createInvoiceLink`, data).then((response => {
           console.log(response)
         })).catch((error) => {
           console.log(error)
