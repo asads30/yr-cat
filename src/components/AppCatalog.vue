@@ -35,7 +35,7 @@
   import AppCatalogItem from "@/components/AppCatalogItem";
   import 'bootstrap/dist/css/bootstrap.min.css'
   import {mapState, mapMutations, mapActions} from 'vuex';
-  import {api} from '@/services/api'
+  import { api } from '@/services/api'
   
   export default {
     name: "AppCatalog",
@@ -77,7 +77,20 @@
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
       },
       goPay(){
-        console.log(this.cart)
+        let result = [];
+        if (this.cart.length) {
+          for (let product of this.cart) {
+            result.push(product.post_id);
+          }
+        }
+        const invoice = {
+          "arrayOfPostIds": result
+        }
+        api.post(`product/${id_store}/createInvoiceLink`, invoice).then((result) => {
+          console.log(result)
+        }).catch((error) => {
+          console.log(error)
+        })
       }
     },
     mounted() {
