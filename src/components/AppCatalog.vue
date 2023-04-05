@@ -91,6 +91,8 @@
         }).catch((error) => {
           console.log(error)
         })
+        console.log(result)
+        console.log(invoice)
       }
     },
     mounted() {
