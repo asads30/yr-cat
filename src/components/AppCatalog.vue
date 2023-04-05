@@ -86,13 +86,13 @@
         const invoice = {
           "arrayOfPostIds": result
         }
+        console.log(result)
+        console.log(invoice)
         api.post(`product/${id_store}/createInvoiceLink`, invoice).then((result) => {
           console.log(result)
         }).catch((error) => {
           console.log(error)
         })
-        console.log(result)
-        console.log(invoice)
       }
     },
     mounted() {
