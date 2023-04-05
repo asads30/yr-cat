@@ -77,33 +77,7 @@
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
       },
       goPay(){
-        const invoice = {
-          provider_token: "1842663557:TEST:54fcd6df8cbdb866cbc53045a9bfa8f89b0bdb27",
-          start_parameter: "get_access",
-          title: "Тестовый магазин",
-          description: "Тестовый магазин Карена",
-          currency: "RUB",
-          prices: this.cartList,
-          payload: 'test',
-          need_name: true,
-          need_phone_number: true,
-          need_email: false,
-          need_shipping_address: true
-        };
-        axios.post(`https://api.telegram.org/bot5628922941:AAHibZzGLVFpG5ezw185_y-6h9gwLRePjf8/createInvoiceLink`, invoice).then(res => {
-          if(res.data.result){
-            let tg = window.Telegram.WebApp;
-            tg.openInvoice(res.data.result, function(status) {
-                if (status == 'paid') {
-                    tg.WebApp.close();
-                } else if (status == 'failed') {
-                    tg.WebApp.HapticFeedback.notificationOccurred('error');
-                } else {
-                    tg.WebApp.HapticFeedback.notificationOccurred('warning');
-                }
-            });
-          }
-        });
+        console.log('click')
       }
     },
     mounted() {
