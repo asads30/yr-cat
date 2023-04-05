@@ -86,13 +86,13 @@
         const invoice = {
           "arrayOfPostIds": result
         }
-        console.log(result)
-        console.log(invoice)
-        api.post(`product/${id_store}/createInvoiceLink`, invoice).then((result) => {
-          console.log(result)
-        }).catch((error) => {
-          console.log(error)
-        })
+        const id_store = localStorage.getItem('id_store')
+        try {
+            const res = api.post(`product/${id_store}/createInvoiceLink`, invoice)
+            console.log(res)
+        } catch (err) {
+            console.error(err)
+        }
       }
     },
     mounted() {
