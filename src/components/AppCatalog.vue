@@ -89,7 +89,16 @@
         const id_store = localStorage.getItem('id_store')
         try {
             const res = api.post(`product/${id_store}/createInvoiceLink`, invoice)
-            console.log(res)
+            const tg = window.Telegram.WebApp;
+            tg.openInvoice(res.data, function(status) {
+              if (status == 'paid') {
+                  tg.WebApp.close();
+              } else if (status == 'failed') {
+                  tg.WebApp.HapticFeedback.notificationOccurred('error');
+              } else {
+                  tg.WebApp.HapticFeedback.notificationOccurred('warning');
+              }
+          });
         } catch (err) {
             console.error(err)
         }
