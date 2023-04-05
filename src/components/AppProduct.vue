@@ -9,7 +9,7 @@
                 </div>
                 <div class="product-footer">
                     <router-link class="product-back" to="/">Назад</router-link>
-                    <button v-if="btnActive" class="product-add" type="button" @click="addToCart">{{ product.price.toLocaleString() }} ₽</button>
+                    <button v-if="btnActive" class="product-add" type="button" @click="addToCart">{{ product.price.toLocaleString()/100 }} ₽</button>
                     <div v-if="!btnActive" class="product-quantity">
                         <button class="product-quantity-item product-quantity--minus" type="button" @click="reduceQuantity"></button>
                         <div class="product-quantity-val">{{ quantity }}</div>
