@@ -77,7 +77,8 @@
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
       },
       goPay(){
-        console.log('click')
+        const cart = this.$cart.getters.sendCart;
+        console.log(cart);
       }
     },
     mounted() {

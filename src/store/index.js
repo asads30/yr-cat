@@ -12,7 +12,7 @@ export default new Vuex.Store({
         data: null
     },
     getters: {
-        sendCart (state) {
+        sendCart(state){
             let result = [];
             for (let product of state.cart) {
                 result.push(product.postId);
