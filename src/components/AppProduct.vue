@@ -69,7 +69,7 @@
                 }
             },
             goMain(){
-                this.$router.push({name: 'catalog'});
+                this.$router.go(-1);
             }
         },
         mounted() {

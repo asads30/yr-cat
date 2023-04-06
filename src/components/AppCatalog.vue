@@ -104,11 +104,9 @@
         try {
           await tg.openInvoice(link, function(status) {
             if (status == 'paid') {
-                tg.WebApp.close();
-            } else if (status == 'failed') {
-                tg.WebApp.HapticFeedback.notificationOccurred('error');
+              tg.WebApp.close();
             } else {
-                tg.WebApp.HapticFeedback.notificationOccurred('warning');
+              alert(status);
             }
           });
         } catch(err) {
