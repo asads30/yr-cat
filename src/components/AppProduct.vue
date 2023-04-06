@@ -1,22 +1,6 @@
 <template>
     <div class="product" v-if="product">
-        <div class="product-box">
-            <div :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="product-img"></div>
-            <div class="product-info">
-                <div class="product-header">
-                    <div class="product-name">{{ product.name }}</div>
-                    <div class="product-des">{{ product.description }}</div>
-                </div>
-                <div class="product-footer">
-                    <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price/100 }} ₽</button>
-                    <div v-if="!btnActive" class="quantity">
-                        <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
-                    <div class="quantity-val">{{ quantity }}</div>
-                        <button class="quantity-item quantity-item--plus" type="button" @click="increaseQuantity"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{ product }}
     </div>
   </template>
   
@@ -58,13 +42,6 @@
                 return 'data:image/png;base64,' + window.btoa( binary )
             }
         },
-        created(){
-            const id_store = localStorage.getItem('id_store')
-            const product_id = this.$route.params.id
-            api.get(`/product/${id_store}/products/${product_id}`).then((response) => {
-                this.product = response
-            })
-        },
         mounted() {
             try {
                 api.get(`/product/${id_store}/products/${product_id}`).then((response) => {
@@ -73,10 +50,6 @@
             } catch (error) {
                 console.log(error)
             }
-            
-        },
-        watch: {
-            $route: 'fetchData'
         }
   }
   </script>
