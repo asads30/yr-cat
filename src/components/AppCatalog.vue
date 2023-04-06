@@ -80,7 +80,9 @@
         let result = [];
         if (this.cart.length) {
           for (let product of this.cart) {
-            result.push(product.post_id);
+            for (let index = 0; index < product.quantity; index++) {
+              result.push(product.post_id);
+            }
           }
         }
         const invoice = {
