@@ -97,7 +97,7 @@
             console.error(err)
         }
       },
-      async goPayment(){
+      async goPayment(link){
         const tg = window.Telegram.WebApp;
         try {
           await tg.openInvoice(link, function(status) {
