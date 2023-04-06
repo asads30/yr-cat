@@ -62,7 +62,7 @@
                 const product_id = this.$route.params.id;
                 try {
                     await api.get(`/product/${id_store}/products/${product_id}`).then((response) => {
-                        this.product = response
+                        this.product = response.data
                     })
                 } catch (error) {
                     console.log(error)
