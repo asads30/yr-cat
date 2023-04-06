@@ -12,7 +12,7 @@ const routes = [
     name: 'catalog',
   },
   {
-    path: '/product/:slug',
+    path: '/product/:id',
     component: AppProduct,
     name: 'product'
   }

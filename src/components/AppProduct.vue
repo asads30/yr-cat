@@ -6,7 +6,7 @@
       <div class="item-info">
         <div class="item-name">{{ product.name }}</div>
         <div class="item-des">{{ product.description }}</div>
-        <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price.toLocaleString()/100 }} ₽</button>
+        <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ getPrice.toLocaleString }} ₽</button>
         <div v-if="!btnActive" class="quantity">
           <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
           <div class="quantity-val">{{ quantity }}</div>
@@ -14,28 +14,26 @@
         </div>
       </div>
     </div>
-</template>
-
+  </template>
+  
 <script>
-export default {
-  name: "AppProduct",
-  data() {
-    return {
-      quantity: 0
-    }
-  },
-  computed: {
-    btnActive() {
-      return this.$store.state.cart.find(product => product.id === this.product.id) ? this.product.isBtnActive : true;
-    },
-    product(){
-        let products = this.$store.state.products;
-        let productId = this.$route.params.slug;
-        let getProduct = products.find(product => product.id == productId);
-        return getProduct;
-    },
-  },
-  methods: {
+    import { api } from '@/services/api'
+    export default {
+        name: "AppCatalogProduct",
+        data() {
+            return {
+                quantity: 0
+            }
+        },
+        computed: {
+            btnActive() {
+                return this.$store.state.cart.find(product => product.id === this.product.id) ? this.product.isBtnActive : true;
+            },
+            getPrice(){
+                return this.product.price/100
+            }
+        },
+        methods: {
     addToCart() {
       this.$store.commit('addToCart', this.product);
       this.quantity++
@@ -60,13 +58,18 @@ export default {
           binary += String.fromCharCode( bytes[ i ] );
       }
       return 'data:image/png;base64,' + window.btoa( binary )
+    },
+    async fetchProduct(){
+        const id = this.$route.params.id
+
     }
   },
   mounted() {
     this.fetchData()
+    this.fetchProduct()
   },
   watch: {
     $route: 'fetchData'
   }
-}
-</script>
+  }
+  </script>
