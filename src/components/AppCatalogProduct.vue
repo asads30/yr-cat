@@ -1,18 +1,18 @@
 <template>
     <div class="item" v-if="product">
-        <div class="item-top">
-            <div :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="item-img"></div>
+      <div class="item-top">
+        <div :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="item-img"></div>
+      </div>
+      <div class="item-info">
+        <div class="item-name">{{ product.name }}</div>
+        <div class="item-des">{{ product.description }}</div>
+        <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price.toLocaleString()/100 }} ₽</button>
+        <div v-if="!btnActive" class="quantity">
+          <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
+          <div class="quantity-val">{{ quantity }}</div>
+          <button class="quantity-item quantity-item--plus" type="button" @click="increaseQuantity"></button>
         </div>
-        <div class="item-info">
-            <div class="item-name">{{ product.name }}</div>
-            <div class="item-des">{{ product.description }}</div>
-            <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price.toLocaleString()/100 }} ₽</button>
-            <div v-if="!btnActive" class="quantity">
-                <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
-                <div class="quantity-val">{{ quantity }}</div>
-                <button class="quantity-item quantity-item--plus" type="button" @click="increaseQuantity"></button>
-            </div>
-        </div>
+      </div>
     </div>
 </template>
 

@@ -22,56 +22,68 @@
 </template>
 
 <script>
-    import {mapActions} from "vuex";
-    export default {
-        name: 'AppProduct',
-        data() {
-            return {
-                quantity: 0
+import { api } from '@/services/api'
+
+export default {
+    name: 'AppProduct',
+    computed: {
+        product(){
+            let products = this.$store.state.products;
+            let productId = this.$route.params.slug;
+            let getProduct = products.find(product => product.id == productId);
+            return getProduct;
+        },
+        quantity() {
+            return this.$store.state.cart.find(product => product.id === this.product.id)?.quantity || null;
+        },
+        btnActive() {
+            return this.$store.state.cart.find(product => product.id === this.product.id) ? this.product.isBtnActive : true;
+        },
+    },
+    methods: {
+        addToCart() {
+            this.$store.commit('addToCart', this.product);
+        },
+        reduceQuantity() {
+            this.$store.commit('reduceQuantity', this.product.id);
+        },
+        increaseQuantity() {
+            this.$store.commit('increaseQuantity', this.product.id);
+        },
+        goHome(){
+            this.$router.push({name: 'catalog'});
+        },
+        goPay(){
+            let result = [];
+            if (this.cart.length) {
+            for (let product of this.cart) {
+                result.push(product.post_id);
             }
-        },
-        computed: {
-            product(){
-                let products = this.$store.state.products;
-                let productId = this.$route.params.slug;
-                let getProduct = products.find(product => product.id == productId);
-                return getProduct;
-            },
-            btnActive() {
-                return this.$store.state.cart.find(product => product.id === this.product.id) ? this.product.isBtnActive : true;
-            },
-        },
-        methods: {
-            addToCart() {
-                this.$store.commit('addToCart', this.product)
-                this.quantity++
-            },
-            reduceQuantity() {
-                this.$store.commit('reduceQuantity', this.product.id)
-                this.quantity--
-            },
-            increaseQuantity() {
-                this.$store.commit('increaseQuantity', this.product.id)
-                this.quantity++
-            },
-            fetchData(){
-                let current = this.$store.state.cart.find(product => product.id === this.product.id)?.quantity || null
-                this.quantity = current
-            },
-            ...mapActions([
-                'backButtonShow'
-            ]),
-            goHome(){
-                this.$router.push('/');
-            },
-        },
-        mounted() {
-            this.fetchData();
-            this.backButtonShow();
-            window.Telegram.WebApp.onEvent('backButtonClicked', this.goHome);
-        },
-        watch: {
-            $route: 'fetchData',
+            }
+            const invoice = {
+            "arrayOfPostIds": result
+            }
+            const id_store = localStorage.getItem('id_store')
+            try {
+                const res = api.post(`product/${id_store}/createInvoiceLink`, invoice)
+                const tg = window.Telegram.WebApp;
+                tg.openInvoice(res.data, function(status) {
+                if (status == 'paid') {
+                    tg.WebApp.close();
+                } else if (status == 'failed') {
+                    tg.WebApp.HapticFeedback.notificationOccurred('error');
+                } else {
+                    tg.WebApp.HapticFeedback.notificationOccurred('warning');
+                }
+            });
+            } catch (err) {
+                console.error(err)
+            }
         }
+    },
+    mounted() {
+        window.Telegram.WebApp.onEvent('backButtonClicked', this.goHome);
+        window.Telegram.WebApp.onEvent('mainButtonClicked', this.goPay);
     }
+}
 </script>
