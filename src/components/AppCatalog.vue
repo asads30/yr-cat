@@ -103,8 +103,9 @@
         const tg = window.Telegram.WebApp;
         try {
           await tg.openInvoice(link, function(status) {
-            if (status == 'paid') {
+            if (status == 'paid' || status == 'pending') {
               tg.WebApp.close();
+              tg.WebApp.HapticFeedback.notificationOccurred('success');
             } else {
               alert(status);
             }
