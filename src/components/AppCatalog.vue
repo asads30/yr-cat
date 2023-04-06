@@ -108,8 +108,6 @@
             } else {
                 tg.WebApp.HapticFeedback.notificationOccurred('warning');
             }
-            console.log(link);
-            console.log(status);
           });
         } catch(err) {
           alert(err);

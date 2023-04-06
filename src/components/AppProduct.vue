@@ -67,10 +67,15 @@
                 } catch (error) {
                     console.log(error)
                 }
+            },
+            goMain(){
+                this.$router.push({name: 'catalog'});
             }
         },
         mounted() {
             this.fetchProduct();
+            window.Telegram.WebApp.BackButton.show();
+            window.Telegram.WebApp.onEvent('backButtonClicked', this.goMain);
         }
   }
   </script>
