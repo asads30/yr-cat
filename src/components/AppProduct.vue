@@ -63,7 +63,6 @@
             }
         },
         mounted() {
-            this.fetchData()
             const id_store = localStorage.getItem('id_store')
             const product_id = this.$route.params.id
             try {
@@ -73,6 +72,7 @@
             } catch (error) {
                 console.log(error)
             }
+            this.fetchData()
         },
         watch: {
             $route: 'fetchData'
