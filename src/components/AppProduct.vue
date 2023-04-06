@@ -1,7 +1,7 @@
 <template>
     <div class="product">
         <div class="product-box">
-            <div :style="'background-image: url(' + require('../assets/icons/' + product.image) + ' );'" class="product-img"></div>
+            <div :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="product-img"></div>
             <div class="product-info">
                 <div class="product-header">
                     <div class="product-name">{{ product.name }}</div>
@@ -79,6 +79,15 @@ export default {
             } catch (err) {
                 console.error(err)
             }
+        },
+        background (buffer) {
+            var binary = '';
+            var bytes = new Uint8Array( buffer );
+            var len = bytes.byteLength;
+            for (var i = 0; i < len; i++) {
+                binary += String.fromCharCode( bytes[ i ] );
+            }
+            return 'data:image/png;base64,' + window.btoa( binary )
         }
     },
     mounted() {
