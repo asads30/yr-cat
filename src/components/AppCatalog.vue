@@ -86,19 +86,24 @@
         const invoice = {
           "arrayOfPostIds": result
         }
-        const id_store = localStorage.getItem('id_store')
+        const id_store = localStorage.getItem('id_store');
+        const tg = window.Telegram.WebApp;
         try {
-            const res = api.post(`product/${id_store}/createInvoiceLink`, invoice)
-            const tg = window.Telegram.WebApp;
-            tg.openInvoice(res.data, function(status) {
-              if (status == 'paid') {
-                  tg.WebApp.close();
-              } else if (status == 'failed') {
-                  tg.WebApp.HapticFeedback.notificationOccurred('error');
-              } else {
-                  tg.WebApp.HapticFeedback.notificationOccurred('warning');
-              }
-          });
+            api.post(`product/${id_store}/createInvoiceLink`, invoice).then(res => {
+              tg.openInvoice(res, function(status) {
+                if (status == 'paid') {
+                    tg.WebApp.close();
+                } else if (status == 'failed') {
+                    tg.WebApp.HapticFeedback.notificationOccurred('error');
+                } else {
+                    tg.WebApp.HapticFeedback.notificationOccurred('warning');
+                }
+              });
+            }).catch(e => {
+              console.log(e)
+            })
+            
+            
         } catch (err) {
             console.error(err)
         }
