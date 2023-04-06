@@ -1,11 +1,11 @@
 <template>
     <div class="item" v-if="product">
       <div class="item-top">
-        <router-link :to="'/product' + product.id" :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="item-img"></router-link>
+        <router-link :to="'/product/' + product.id" :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="item-img"></router-link>
       </div>
       <div class="item-info">
-        <router-link :to="'/product' + product.id" class="item-name">{{ product.name }}</router-link>
-        <router-link :to="'/product' + product.id" class="item-des">{{ product.description }}</router-link>
+        <router-link :to="'/product/' + product.id" class="item-name">{{ product.name }}</router-link>
+        <router-link :to="'/product/' + product.id" class="item-des">{{ product.description }}</router-link>
         <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price.toLocaleString()/100 }} ₽</button>
         <div v-if="!btnActive" class="quantity">
           <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
