@@ -1,8 +1,8 @@
 <template>
     <div class="item" v-if="product">
-      <div class="item-top">
-        <router-link :to="'/product/' + product.id" :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="item-img"></router-link>
-      </div>
+      <router-link :to="'/product/' + product.id" class="item-top">
+        <div :style="'background-image: url(' + background(product.thumbnail_buffer.data) + ');'" class="item-img"></div>
+      </router-link>
       <div class="item-info">
         <router-link :to="'/product/' + product.id" class="item-name">{{ product.name }}</router-link>
         <router-link :to="'/product/' + product.id" class="item-des">{{ product.description }}</router-link>
