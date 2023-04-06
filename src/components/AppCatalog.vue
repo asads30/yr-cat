@@ -88,26 +88,41 @@
         }
         const id_store = localStorage.getItem('id_store');
         try {
-            api.post(`product/${id_store}/createInvoiceLink`, invoice).then(res => {
-              const tg = window.Telegram.WebApp;
-              tg.openInvoice(res, function(status) {
-                if (status == 'paid') {
-                    tg.WebApp.close();
-                } else if (status == 'failed') {
-                    tg.WebApp.HapticFeedback.notificationOccurred('error');
-                } else {
-                    tg.WebApp.HapticFeedback.notificationOccurred('warning');
-                }
-                console.log(res)
-                console.log(status)
-              });
-            }).catch(e => {
-              console.log(e)
-            })
-            
-            
+          api.post(`product/${id_store}/createInvoiceLink`, invoice).then(res => {
+            console.log(res);
+            this.goPayment(res);
+            // async tg.openInvoice(link, function(status) {
+            //   if (status == 'paid') {
+            //       tg.WebApp.close();
+            //   } else if (status == 'failed') {
+            //       tg.WebApp.HapticFeedback.notificationOccurred('error');
+            //   } else {
+            //       tg.WebApp.HapticFeedback.notificationOccurred('warning');
+            //   }
+            //   console.log(res)
+            //   console.log(status)
+            // });
+          }).catch(e => {
+            console.log(e)
+          })
         } catch (err) {
             console.error(err)
+        }
+      },
+      async goPayment(){
+        const tg = window.Telegram.WebApp;
+        try {
+          await tg.openInvoice(link, function(status) {
+            if (status == 'paid') {
+                tg.WebApp.close();
+            } else if (status == 'failed') {
+                tg.WebApp.HapticFeedback.notificationOccurred('error');
+            } else {
+                tg.WebApp.HapticFeedback.notificationOccurred('warning');
+            }
+          });
+        } catch(err) {
+          alert(err);
         }
       }
     },
