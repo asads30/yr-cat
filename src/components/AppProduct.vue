@@ -47,10 +47,6 @@
             increaseQuantity() {
                 this.$store.commit('increaseQuantity', this.product.id);
                 this.quantity++
-                },
-            fetchData(){
-                let current = this.$store.state.cart.find(product => product.id === this.product.id)?.quantity || null
-                this.quantity = current
             },
             background (buffer) {
                 var binary = '';
@@ -65,6 +61,11 @@
         created(){
             const id_store = localStorage.getItem('id_store')
             const product_id = this.$route.params.id
+            api.get(`/product/${id_store}/products/${product_id}`).then((response) => {
+                this.product = response
+            })
+        },
+        mounted() {
             try {
                 api.get(`/product/${id_store}/products/${product_id}`).then((response) => {
                     this.product = response
@@ -72,9 +73,7 @@
             } catch (error) {
                 console.log(error)
             }
-        },
-        mounted() {
-            this.fetchData()
+            
         },
         watch: {
             $route: 'fetchData'
