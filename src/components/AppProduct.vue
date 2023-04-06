@@ -40,16 +40,21 @@
                     binary += String.fromCharCode( bytes[ i ] );
                 }
                 return 'data:image/png;base64,' + window.btoa( binary )
+            },
+            async fetchProduct(){
+                const id_store = localStorage.getItem('id_store');
+                const product_id = this.$route.params.id;
+                try {
+                    await api.get(`/product/${id_store}/products/${product_id}`).then((response) => {
+                        this.product = response
+                    })
+                } catch (error) {
+                    console.log(error)
+                }
             }
         },
         mounted() {
-            try {
-                api.get(`/product/${id_store}/products/${product_id}`).then((response) => {
-                    this.product = response
-                })
-            } catch (error) {
-                console.log(error)
-            }
+            this.fetchProduct();
         }
   }
   </script>
