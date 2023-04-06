@@ -87,9 +87,9 @@
           "arrayOfPostIds": result
         }
         const id_store = localStorage.getItem('id_store');
-        const tg = window.Telegram.WebApp;
         try {
             api.post(`product/${id_store}/createInvoiceLink`, invoice).then(res => {
+              const tg = window.Telegram.WebApp;
               tg.openInvoice(res, function(status) {
                 if (status == 'paid') {
                     tg.WebApp.close();
@@ -98,6 +98,8 @@
                 } else {
                     tg.WebApp.HapticFeedback.notificationOccurred('warning');
                 }
+                console.log(res)
+                console.log(status)
               });
             }).catch(e => {
               console.log(e)
