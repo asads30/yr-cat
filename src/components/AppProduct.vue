@@ -62,7 +62,7 @@
                 return 'data:image/png;base64,' + window.btoa( binary )
             }
         },
-        mounted() {
+        created(){
             const id_store = localStorage.getItem('id_store')
             const product_id = this.$route.params.id
             try {
@@ -72,6 +72,8 @@
             } catch (error) {
                 console.log(error)
             }
+        },
+        mounted() {
             this.fetchData()
         },
         watch: {
