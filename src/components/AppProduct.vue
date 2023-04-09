@@ -67,6 +67,8 @@
                 } catch (error) {
                     console.log(error)
                 }
+                this.quantity = this.$store.state.cart.find(product => product.id === this.product.id)?.quantity || null
+                this.quantity = current
             },
             goMain(){
                 this.$router.go(-1);
