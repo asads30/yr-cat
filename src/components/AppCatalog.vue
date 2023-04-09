@@ -91,18 +91,7 @@
         const id_store = localStorage.getItem('id_store');
         try {
           await api.post(`product/${id_store}/createInvoiceLink`, invoice).then(res => {
-            this.goPayment(res.data);
-          }).catch(e => {
-            console.log(e)
-          })
-        } catch (err) {
-            console.error(err)
-        }
-      },
-      async goPayment(link){
-        const tg = window.Telegram.WebApp;
-        try {
-          await tg.openInvoice(link, function(status) {
+            window.Telegram.WebApp.openInvoice(res.data, function(status) {
             if (status == 'paid' || status == 'pending') {
               tg.WebApp.close();
               tg.WebApp.HapticFeedback.notificationOccurred('success');
@@ -112,8 +101,11 @@
               tg.WebApp.HapticFeedback.notificationOccurred('error');
             }
           });
-        } catch(err) {
-          alert(err);
+          }).catch(e => {
+            console.log(e)
+          })
+        } catch (err) {
+            console.error(err)
         }
         window.Telegram.WebApp.offEvent('mainButtonClicked', this.goPay);
       }
