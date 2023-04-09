@@ -76,7 +76,7 @@
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
       },
-      goPay(){
+      async goPay(){
         let result = [];
         if (this.cart.length) {
           for (let product of this.cart) {
@@ -90,7 +90,7 @@
         }
         const id_store = localStorage.getItem('id_store');
         try {
-          api.post(`product/${id_store}/createInvoiceLink`, invoice).then(res => {
+          await api.post(`product/${id_store}/createInvoiceLink`, invoice).then(res => {
             this.goPayment(res.data);
           }).catch(e => {
             console.log(e)
@@ -106,13 +106,16 @@
             if (status == 'paid' || status == 'pending') {
               tg.WebApp.close();
               tg.WebApp.HapticFeedback.notificationOccurred('success');
-            } else {
-              alert(status);
+            } else if(status == 'cancelled' || status == 'failed') {
+              tg.WebApp.HapticFeedback.notificationOccurred('error');
+            } else{
+              tg.WebApp.HapticFeedback.notificationOccurred('error');
             }
           });
         } catch(err) {
           alert(err);
         }
+        window.Telegram.WebApp.offEvent('mainButtonClicked', this.goPay);
       }
     },
     mounted() {
