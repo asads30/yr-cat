@@ -9,7 +9,8 @@ export default new Vuex.Store({
         categories: [],
         products: [],
         cart: [],
-        data: null
+        data: null,
+        activeCategories: []
     },
     getters: {
         sendCart(state){
@@ -25,6 +26,9 @@ export default new Vuex.Store({
         getProducts(state){
             const activeProducts = state.products.filter((product) => product.status == 1)
             return activeProducts
+        },
+        getActiveCategories(state){
+            return state.activeCategories.sort();
         }
     },
     mutations: {
@@ -33,6 +37,9 @@ export default new Vuex.Store({
         },
         addProducts: (state, payload) => {
             state.products.push(payload.products)
+        },
+        addActiveCategories: (state, payload) => {
+            state.activeCategories.push(payload.categories)
         },
         addToCart: (state, product) => {
             product.isBtnActive = false;
