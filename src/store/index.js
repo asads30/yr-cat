@@ -21,6 +21,10 @@ export default new Vuex.Store({
                 "arrayOfPostIds": result
             }
             return data;
+        },
+        getProducts(state){
+            const activeProducts = state.products.filter((product) => product.status == 1)
+            return activeProducts
         }
     },
     mutations: {

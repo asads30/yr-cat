@@ -34,7 +34,7 @@
   <script>
   import AppCatalogItem from "@/components/AppCatalogItem";
   import 'bootstrap/dist/css/bootstrap.min.css'
-  import {mapState, mapMutations, mapActions} from 'vuex';
+  import {mapState, mapMutations, mapActions, mapGetters} from 'vuex';
   import { api } from '@/services/api'
   
   export default {
@@ -45,6 +45,9 @@
         "categories",
         "cart"
       ]),
+      ...mapGetters([
+        "getProducts"
+      ])
     },
     methods: {
       ...mapMutations([

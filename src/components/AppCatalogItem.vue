@@ -32,9 +32,10 @@ export default {
     const id_store = localStorage.getItem('id_store')
     try {
       api.get(`/product/${id_store}/categories/${this.id}`).then((response) => {
-        this.products = response.data.products
+        const activeProducts = response.data.products.filter((product) => product.status == 1)
+        this.products = activeProducts
         this.$store.commit('addProducts', {
-          products: response.data.products
+          products: activeProducts
         })
       })
     } catch (error) {
