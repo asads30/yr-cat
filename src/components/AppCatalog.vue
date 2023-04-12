@@ -106,6 +106,7 @@
             } else{
               tg.WebApp.HapticFeedback.notificationOccurred('error');
             }
+            window.Telegram.WebApp.offEvent('mainButtonClicked', this.goPay);
           });
           }).catch(e => {
             console.log(e)
@@ -113,7 +114,6 @@
         } catch (err) {
             console.error(err)
         }
-        window.Telegram.WebApp.offEvent('mainButtonClicked', this.goPay);
       }
     },
     mounted() {
