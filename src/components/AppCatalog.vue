@@ -67,6 +67,7 @@
       },
       loadData(){
         const id = this.$route.params.id;
+        const id_params = this.$route.query.tgWebAppStartParam
         const tg = window.Telegram.WebApp;
         tg.isClosingConfirmationEnabled = true;
         tg.expand();
@@ -75,12 +76,13 @@
             color: '#27ae60',
             text_color: '#fff'
         });
-        localStorage.setItem('id_store', id);
+        if(id){
+          localStorage.setItem('id_store', id);
+        } else{
+          localStorage.setItem('id_store', id_params)
+        }
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
-        // localStorage.setItem('id_store', 'fefc4f1e4705752a99644bd7769776e5049303a4c35131a512bedeaca59b3cd5');
-        // localStorage.setItem('init_data', 'query_id=AAG5iwoXAAAAALmLChc9Pr_G&user=%7B%22id%22%3A386567097%2C%22first_name%22%3A%22Asadbek%22%2C%22last_name%22%3A%22Ibragimov%22%2C%22username%22%3A%22wpbrouz%22%2C%22language_code%22%3A%22ru%22%2C%22is_premium%22%3Atrue%7D&auth_date=1681148982&hash=4e2ba8f57396f29bf6d3b2f7d1ac39aedbf29c1c4ae017126427407d6e399f95');
-        // localStorage.setItem('user_id', 386567097)
       },
       async goPay(){
         let result = [];
