@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import AppCatalog from "@/components/AppCatalog"
+import AppHome from "@/components/AppHome"
 import AppProduct from "@/components/AppProduct"
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/',
+    component: AppHome,
+    name: 'home',
+  },
   {
     path: '/shop/:id',
     component: AppCatalog,

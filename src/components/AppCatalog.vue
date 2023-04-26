@@ -67,7 +67,6 @@
       },
       loadData(){
         const id = this.$route.params.id;
-        const id_params = this.$route.query.tgWebAppStartParam
         const tg = window.Telegram.WebApp;
         tg.isClosingConfirmationEnabled = true;
         tg.expand();
@@ -76,11 +75,7 @@
             color: '#27ae60',
             text_color: '#fff'
         });
-        if(id_params){
-          localStorage.setItem('id_store', id_params);
-        } else{
-          localStorage.setItem('id_store', id)
-        }
+        localStorage.setItem('id_store', id)
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
       },
