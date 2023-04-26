@@ -76,10 +76,10 @@
             color: '#27ae60',
             text_color: '#fff'
         });
-        if(id){
-          localStorage.setItem('id_store', id);
+        if(id_params){
+          localStorage.setItem('id_store', id_params);
         } else{
-          localStorage.setItem('id_store', id_params)
+          localStorage.setItem('id_store', id)
         }
         localStorage.setItem('init_data', tg?.initData);
         localStorage.setItem('user_id', tg?.initDataUnsafe.user.id);
