@@ -50,7 +50,7 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      let log = window.location.search
+      let log = window.Telegram
       return JSON.stringify(log)
     }
   },
