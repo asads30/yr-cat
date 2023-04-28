@@ -1,7 +1,7 @@
 <template>
   <div class="catalog">
       <div class="header">
-        {{ logger }}
+        {{ JSON.stringify(logger) }}
         <b-nav pills class="header-nav" slot="header" v-b-scrollspy:nav-scroller>
           <b-nav-item 
             v-for="category in categories"
