@@ -50,7 +50,7 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      return this.$route.query.tgWebAppStartParam
+      return this.$route
     }
   },
   methods: {
