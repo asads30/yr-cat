@@ -28,7 +28,7 @@ export default new Vuex.Store({
             return activeProducts
         },
         getActiveCategories(state){
-            return state.activeCategories.sort();
+            return state.categories.sort();
         }
     },
     mutations: {

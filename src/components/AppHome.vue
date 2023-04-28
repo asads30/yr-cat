@@ -1,5 +1,6 @@
 <template>
   <div class="catalog">
+      {{ getActiveCategories }}
       <div class="header">
         <b-nav pills class="header-nav" slot="header" v-b-scrollspy:nav-scroller>
           <b-nav-item 
