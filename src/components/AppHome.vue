@@ -50,7 +50,7 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      let log = window.Telegram.WebApp.initDataUnsafe
+      let log = window.Telegram.WebView.initParams
       return JSON.stringify(log)
     }
   },
