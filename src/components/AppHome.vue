@@ -50,7 +50,7 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      return window.location.href
+      return window.location
     }
   },
   methods: {
