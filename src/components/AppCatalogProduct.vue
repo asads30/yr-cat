@@ -6,7 +6,7 @@
     <div class="item-info">
       <router-link :to="'/product/' + product.id" class="item-name">{{ product.name }}</router-link>
       <router-link :to="'/product/' + product.id" class="item-des">{{ product.description }}</router-link>
-      <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price }} ₽</button>
+      <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price/100 }} ₽</button>
       <div v-if="!btnActive" class="quantity">
         <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
         <div class="quantity-val">{{ quantity }}</div>
