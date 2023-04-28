@@ -1,7 +1,7 @@
 <template>
   <div class="catalog">
       <div class="header">
-        {{ JSON.stringify(logger) }}
+        {{ logger }}
         <b-nav pills class="header-nav" slot="header" v-b-scrollspy:nav-scroller>
           <b-nav-item 
             v-for="category in categories"
@@ -50,7 +50,8 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      return window
+      let log = window.Telegram.WebApp.initDataUnsafe
+      return JSON.stringify(log)
     }
   },
   methods: {
