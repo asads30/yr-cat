@@ -50,7 +50,7 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      let log = window.Telegram.WebView.initParams
+      let log = window.location.search
       return JSON.stringify(log)
     }
   },
