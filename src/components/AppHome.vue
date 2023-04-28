@@ -50,7 +50,7 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      this.$route.query.tgWebAppStartParam
+      return window.Telegram.WebApp
     }
   },
   methods: {
