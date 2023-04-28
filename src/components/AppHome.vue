@@ -50,7 +50,7 @@ export default {
       "getActiveCategories"
     ]),
     logger(){
-      return this.$route
+      return window.location.href
     }
   },
   methods: {
