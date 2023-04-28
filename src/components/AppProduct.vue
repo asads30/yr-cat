@@ -8,7 +8,7 @@
                     <div class="product-des">{{ product.description }}</div>
                 </div>
                 <div class="product-footer">
-                    <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price/100 }} ₽</button>
+                    <button v-if="btnActive" class="item-add" type="button" @click="addToCart">{{ product.price }} ₽</button>
                     <div v-if="!btnActive" class="quantity">
                         <button class="quantity-item quantity-item--minus" type="button" @click="reduceQuantity"></button>
                     <div class="quantity-val">{{ quantity }}</div>
