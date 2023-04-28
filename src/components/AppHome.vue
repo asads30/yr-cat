@@ -36,7 +36,7 @@ import {mapState, mapMutations, mapActions, mapGetters} from 'vuex';
 import { api } from '@/services/api'
 
 export default {
-  name: "AppCatalog",
+  name: "AppHome",
   components: {AppCatalogItem},
   computed: {
     ...mapState([
@@ -114,7 +114,11 @@ export default {
     }
   },
   mounted() {
-    this.loadData();
+    try {
+      this.loadData();
+    } catch (error) {
+      console.log(error)
+    }
     this.fetchCategories();
     window.Telegram.WebApp.onEvent('mainButtonClicked', this.goPay);
   }
